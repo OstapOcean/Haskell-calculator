@@ -28,8 +28,8 @@ toFloat x = read x :: Float
 
  -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
  
-calculate :: [Char] -> (Float, [[Char]])
-calculate (expr) = mInput(splitOn " " expr)
+calculate :: [Char] -> Float
+calculate (expr) = fst(mInput(splitOn " " expr))
 
 mInput :: [[Char]] -> (Float, [[Char]])
 mInput (expr) = fInput(toFloat(head expr), tail expr)
