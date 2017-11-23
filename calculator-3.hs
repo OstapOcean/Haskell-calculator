@@ -95,40 +95,4 @@ sCalcF (sAcc, expr) | null expr   = (sAcc, [])
                     cutExpr = tail(tail expr)
                     cOpr    = head expr
                     nNum    = toFloat(head(tail expr))
-
-
-             
-             
-
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
+                    
