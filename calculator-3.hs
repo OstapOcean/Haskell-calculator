@@ -1,11 +1,26 @@
--- acc - accumulator
--- m*  - main *
--- c*  - current *
--- n*  - next *
--- f*  - first *
--- s*  - second *
--- opr - operation
--- num - number
+-- DESCRIPTION:
+
+-- To calculate some expression call "calculate" function with expression string as single parameter.
+
+-- Numbers and symbols of operations in entry string must divided by spaces.
+-- Examples: "2 + 3", "4.8 * 2 / 57 - 9"
+
+ -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+-- LEGEND:
+
+-- acc  - accumulator
+-- expr - expression
+-- m*   - main *
+-- c*   - current *
+-- n*   - next *
+-- f*   - first *
+-- s*   - second *
+-- opr  - operation
+-- num  - number
+-- *f   - * final
+
+ -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 import Data.Char
 import Data.List.Split
@@ -35,7 +50,7 @@ mInput :: [[Char]] -> (Float, [[Char]])
 mInput (expr) = fInput(toFloat(head expr), tail expr)
 
  -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
- 
+
 fInput :: (Float, [[Char]]) -> (Float, [[Char]])
 fInput (fAcc, expr) | null expr                  = (fAcc, [])
                     | null cutExpr               = fCalcF(fAcc, cOpr, (nNum, cutExpr))
@@ -55,14 +70,14 @@ fCalc (fAcc, cOpr, (nNum, expr)) | null expr    = fCalcF(fAcc, cOpr, (nNum, expr
                                  | cOpr == "*"  = fInput(mul(fAcc, (nNum, expr)))
                                  | cOpr == "/"  = fInput(prt(fAcc, (nNum, expr)))
                                  | otherwise    = (fAcc, [])
-                  
+
 fCalcF :: (Float, [Char], (Float, [[Char]])) -> (Float, [[Char]])
 fCalcF (fAcc, cOpr, (nNum, expr)) | cOpr == "+" = add(fAcc, (nNum, []))
                                   | cOpr == "-" = sub(fAcc, (nNum, []))
                                   | cOpr == "*" = mul(fAcc, (nNum, []))
                                   | cOpr == "/" = prt(fAcc, (nNum, []))
                                   | otherwise   = (fAcc, [])
-   
+
  -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 sInput :: (Float, [[Char]]) -> (Float, [[Char]])
@@ -74,7 +89,7 @@ sInput (sAcc, expr) | null expr                  = (sAcc, expr)
                     where
                     cutExpr = tail(tail expr)
                     nOpr    = head(cutExpr)
-             
+
 sCalc :: (Float, [[Char]]) -> (Float, [[Char]])
 sCalc (sAcc, expr) | null expr   = (sAcc, [])
                    | cOpr == "*" = sInput(mul(sAcc, (nNum, cutExpr)))
@@ -83,9 +98,8 @@ sCalc (sAcc, expr) | null expr   = (sAcc, [])
                    where
                    cutExpr = tail(tail expr)
                    cOpr    = head expr
-                   cNum    = toFloat(head expr)
                    nNum    = toFloat(head(tail expr))
-                  
+
 sCalcF :: (Float, [[Char]]) -> (Float, [[Char]])
 sCalcF (sAcc, expr) | null expr   = (sAcc, [])
                     | cOpr == "*" = mul(sAcc, (nNum, cutExpr))
@@ -95,4 +109,3 @@ sCalcF (sAcc, expr) | null expr   = (sAcc, [])
                     cutExpr = tail(tail expr)
                     cOpr    = head expr
                     nNum    = toFloat(head(tail expr))
-                    
